@@ -161,71 +161,69 @@ Bu “kendini tekrar etme” (ya da KTE) kuralının önemli bir kısmıdır. Ko
     sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
     ```
 
-1.  Follow <http://nicercode.github.io/intro/writing-functions.html> to 
-    write your own functions to compute the variance and skew of a numeric 
-    vector.
+4.  <http://nicercode.github.io/intro/writing-functions.html> adresini inceleyerek 
+    nümerik bir vektörün varyans ve eğikliğini hesaplamak için kendi 
+    fonksiyonlarınızı yazınız.
 
-1.  Write `both_na()`, a function that takes two vectors of the same length 
-    and returns the number of positions that have an `NA` in both vectors.
+5.	Aynı uzunluktaki iki vektörü alıp her iki vektörde NA içeren konum sayısını veren
+    bir both_na() fonksiyonu yazınız.
 
-1.  What do the following functions do? Why are they useful even though they
-    are so short?
+6.  Aşağıdaki fonksiyonlar ne işe yarar? Çok kısa olsalar da neden kullanışlıdırlar?
     
     ```{r}
     is_directory <- function(x) file.info(x)$isdir
     is_readable <- function(x) file.access(x, 4) == 0
     ```
 
-1.  Read the [complete lyrics](https://en.wikipedia.org/wiki/Little_Bunny_Foo_Foo) 
-    to "Little Bunny Foo Foo". There's a lot of duplication in this song. 
-    Extend the initial piping example to recreate the complete song, and use 
-    functions to reduce the duplication.
+7.  “Little Bunny Foo Foo” şarkısının tüm sözlerini okuyunuz. Şarkıda çok fazla tekrar 
+    bulunmaktadır. Başlangıçtaki küme komut işleme (piping) örneğini genişleterek 
+    tüm şarkıyı yeniden oluşturunuz ve tekrarları azaltmak için fonksiyon kullanınız.
 
-## Functions are for humans and computers
+## İnsanlar ve bilgisayarlar için fonksiyonlar
 
-It's important to remember that functions are not just for the computer, but are also for humans. R doesn't care what your function is called, or what comments it contains, but these are important for human readers. This section discusses some things that you should bear in mind when writing functions that humans can understand.
+Fonksiyonların sadece bilgisayarlar için değil aynı zaman da insanlar için de olduğunu unutmamak gerekir. R fonksiyonunuzun adının ne olduğu ya da içerdiği yorumlar ile ilgilenmez ancak bunlar insan okurlar açısından önemlidir. Bu bölümde insanların anlayabileceği fonksiyonlar yazmak için aklınızda tutmanız gereken birkaç şeyi tartışmaktadır.
 
-The name of a function is important. Ideally, the name of your function will be short, but clearly evoke what the function does. That's hard! But it's better to be clear than short, as RStudio's autocomplete makes it easy to type long names.
+Bir fonksiyonun adı önemlidir. İdeal bir fonksiyon adı kısa olmalı ancak fonksiyonun tam olarak ne yaptığını açık bir şekilde ifade edebilmelidir. Bu kolay bir iş değildir! Ancak RStudio’daki otomatik tamamlama uzun isimlerin yazımını kolaylaştırdığından netlik kısa olmasından daha iyidir.
 
-Generally, function names should be verbs, and arguments should be nouns. There are some exceptions: nouns are ok if the function computes a very well known noun (i.e. `mean()` is better than `compute_mean()`), or accessing some property of an object (i.e. `coef()` is better than `get_coefficients()`). A good sign that a noun might be a better choice is if you're using a very broad verb like "get", "compute", "calculate", or "determine". Use your best judgement and don't be afraid to rename a function if you figure out a better name later.
+Genellikle fonksiyon isimleri fiil, argümanlar ise isim olmalıdır. Bunun bazı istisnaları vardır: Fonksiyon iyi bilinen bir ismi hesaplıyorsa (mean() compute_mean()’den daha iyidir) ya da bir nesnenin bir özelliğine erişim sağlıyorsa (coef() get_coefficients()’ten daha iyidir) isimler kullanılabilir. Bir isim kullanmanın daha iyi olabileceğine ilişkin bir işaret olarak fiilin çok geniş bir kullanıma sahip bir fiil olması alınabilir. Örneğin “get”, “compute”, “calculate” ya da “determine” bu tip fiillerdir. Değerlendirmenizi iyi bir şekilde yapın ve eğer sonrada daha iyi bir isim bulursanız fonksiyonunuzun ismini değiştirmekten korkmayın.
 
 ```{r, eval = FALSE}
-# Too short
+# Fazla kısa
 f()
 
-# Not a verb, or descriptive
+# Fiil de değil, tanımlayıcı da...
 my_awesome_function()
 
-# Long, but clear
+# Uzun ama anlaşılır
 impute_missing()
 collapse_years()
 ```
 
-If your function name is composed of multiple words, I recommend using "snake\_case", where each lowercase word is separated by an underscore. camelCase is a popular alternative. It doesn't really matter which one you pick, the important thing is to be consistent: pick one or the other and stick with it. R itself is not very consistent, but there's nothing you can do about that. Make sure you don't fall into the same trap by making your code as consistent as possible.
+Fonksiyonunuzun ismi çok sayıda kelimeden oluşuyorsa “yılan_şekli”ni kullanmanızı tavsiye ederim. Bunda küçük harflerden oluşan her bir kelime bir alt çizgi ile birbirinden ayrılır. deveŞekli ise popüler bir alternatiftir. Hangisini kullandığınızın pek bir önemi yoktur; önemli olan tutarlı olmaktır. Birini seçin ve hep bunu kullanın. R’ın kendisi pek tutarlı değildir ama bu konuda yapabileceğiniz bir şey yok. Kodunuzu olabildiğince tutarlı yaparak aynı tuzağa düşmemeye çalışın.
 
 ```{r, eval = FALSE}
-# Never do this!
+# Bunu asla yapmayın!
 col_mins <- function(x, y) {}
 rowMaxes <- function(y, x) {}
 ```
 
-If you have a family of functions that do similar things, make sure they have consistent names and arguments. Use a common prefix to indicate that they are connected. That's better than a common suffix because autocomplete allows you to type the prefix and see all the members of the family. 
+Benzer şeyleri yapan bir fonksiyon aileniz varsa tutarlı isim ve argümanlarının olmasına dikkat edin. Bunların birbiriyle alakalı olduğunu belirtmek için ortak bir ön ek kullanın. Ön ek son ekten daha iyidir çünkü otomatik tamamlama ön eki yazdığınızda ailedeki tüm fonksiyonları görmenizi sağlar.
 
 ```{r, eval = FALSE}
-# Good
+# İyi
 input_select()
 input_checkbox()
 input_text()
 
-# Not so good
+# O kadar iyi değil
 select_input()
 checkbox_input()
 text_input()
 ```
 
-A good example of this design is the stringr package: if you don't remember exactly which function you need, you can type `str_` and jog your memory.
+Bu tasarıma iyi bir örnek olarak stringr paketi verilebilir: Hangi fonksiyona ihtiyacınız olduğunu tam olarak hatırlamıyorsanız str_ yazarak hafızanızı tazeleyebilirsiniz.
+Mümkünse mevcut fonksiyon ve değişkenlerin üzerine kaydetmekten kaçının. Bunu genele olarak yapmak mümkün değildir çünkü birçok iyi isim diğer paketler tarafından alınmıştır ama temel R’daki en yaygın isimlerden kaçınmak akıl karışıklığının önüne geçecektir.
 
-Where possible, avoid overriding existing functions and variables. It's impossible to do in general because so many good names are already taken by other packages, but avoiding the most common names from base R will avoid confusion.
 
 ```{r, eval = FALSE}
 # Don't do this!

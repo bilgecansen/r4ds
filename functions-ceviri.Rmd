@@ -222,7 +222,7 @@ text_input()
 ```
 
 Bu tasarıma iyi bir örnek olarak stringr paketi verilebilir: Hangi fonksiyona ihtiyacınız olduğunu tam olarak hatırlamıyorsanız str_ yazarak hafızanızı tazeleyebilirsiniz.
-Mümkünse mevcut fonksiyon ve değişkenlerin üzerine kaydetmekten kaçının. Bunu genele olarak yapmak mümkün değildir çünkü birçok iyi isim diğer paketler tarafından alınmıştır ama temel R’daki en yaygın isimlerden kaçınmak akıl karışıklığının önüne geçecektir.
+Mümkünse mevcut fonksiyon ve değişkenlerin üzerine kaydetmekten kaçının. Bunu genele olarak yapmak mümkün değildir çünkü birçok iyi isim diğer paketler tarafından alınmıştır ama temel R’daki en yaygın isimlerden kaçınmak akıl karışıklığının önüne geçecektir. 
 
 
 ```{r, eval = FALSE}

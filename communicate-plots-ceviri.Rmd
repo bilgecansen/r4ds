@@ -11,15 +11,15 @@ output: html_document
 
 ## Giriş
 
-[Keşfedici veri analizinde], plotları _keşif_ için nasıl araç olarak kullanacağımızı öğrendiniz. Keşfedici grafikler yaptığınızda, --bakmadan önce bile-- plotun hangi değişkenleri göstereceğini bilirsiniz. Yaptığınız her plotu bir amaçla yapıyorsunuz hızlıca bakabilir ve bir sonraki grafiğe geçebilirsiniz. Birçok analiz sürecinde birçoğunu da hemen kenara atacağınız onlarca hatta yüzlerce grafikler üreteceksiniz. 
+[Keşfedici veri analizinde], grafikleri nasıl _keşif_ aracı olarak kullanacağınızı öğrendiniz. Keşfedici grafikler yaptığınızda, --bakmadan önce bile-- grafiğin hangi değişkenleri göstereceğini bilirsiniz. Yaptığınız her grafiği bir amaçla yapıyorsunuz, hızlıca bakabilir ve bir sonraki grafiğe geçebilirsiniz. Birçok analiz sürecinde birçoğunu da hemen kenara atacağınız onlarca hatta yüzlerce grafikler üreteceksiniz. 
 
-Artık verilerinizi anladığınıza göre, anlayışınızı başkalarına _iletmeniz_ gerekir. Hedef kitleniz geçmiş bilgilerinizi paylaşmayacak ve verilere derinden yatırım yapılmayacaktır. Başkalarının hızlı bir şekilde verinin iyi bir zihinsel modelini oluşturmasına yardımcı olmak için, plotlarınızı mümkün olduğu kadar açıklayıcı hale getirmek için büyük çaba harcamanız gerekecektir. Bu bölümde, ggplot2'nin size sağladığı araçlardan bazılarını öğreneceksiniz.
+Artık verilerinizi anladığınıza göre, anlayışınızı başkalarına _iletmeniz_ gerekir. Hedef kitleniz muhtemelen sizin bilgi birikiminze sahip olmayacak ve verilerinize yeterli dikkati göstermeyecektir. Başkalarının hızlı bir şekilde verinin iyi bir zihinsel modelini oluşturmasına yardımcı olmak için,  grafiklerinizi mümkün olduğu kadar açıklayıcı hale getirmeye çabalayacaksınız. Bu bölümde, ggplot2'nin size sağladığı araçlardan bazılarını öğreneceksiniz.
 
-Bu bölümde iyi grafikler oluşturmak için ihtiyacınız olan araçlara değinilecektir. Ne istediğinizi bildiğinizi ve nasıl yapmanız gerektiğinizi bildiğinizi düşünüyorum. Bu nedenle, bu bölümü iyi bir genel görselleştirme kitabıyla eşleştirmenizi öneririm. Özellikle Albert Cairo'dan [_The Truthful Art_](https://amzn.com/0321934075) adlı kitabı seviyorum. Görselleştirme oluşturmanın mekaniklerini öğretmiyor ancak bunun yerine etkili grafikler oluşturmak için nasıl düşünmeniz gerektiğine odaklanıyor.
+Bu bölüm, iyi grafikler oluşturmak için ihtiyacınız olan araçlara odaklanacaktır. Ne istediğinizi bildiğinizi ve nasıl yapmanız gerektiğinizi bildiğinizi varsayıyorum. Bu nedenle, bu bölümü iyi bir genel görselleştirme kitabıyla eşleştirmenizi öneririm. Özellikle Albert Cairo'dan [_The Truthful Art_](https://amzn.com/0321934075) adlı kitabı seviyorum. Görselleştirmenin mekaniklerininden ziyade, etkili grafikler oluşturmak için nasıl düşünmeniz gerektiğine odaklanıyor.
 
 ### Önkoşullar
-Bu bölümde birkez daha ggplot2’ye odaklanacağız. Ayırca biraz veri manipülasyonu için dplyr’e ve __ggrepel__ ve __viridis__ dahil olmak üzere birkaç ggplot2 eklenti paketlerinden yararlanacağız. Bu uzantıları buraya yüklemek yerine, :: gösterimini kullanarak işlevlerini açıkça gösterereceğiz. Bu hangi fonksiyonların ggplot2 içinde yüklü olduğunu ve hangilerinin 
-diğer paketlerden geldiğini görmemize yardımcı olacaktır. Eğer bu paketleri henüz yüklemediyseniz `install.packages()` komutuyla yüklemeniz gerektiğini unutmayınız. 
+
+Bu bölümde bir kez daha ggplot2’ye odaklanacağız. Ayırca biraz veri manipülasyonu için dplyr ve __ggrepel__ ve __viridis__ dahil olmak üzere birkaç ggplot2 eklenti paketinden yararlanacağız. Bu uzantıları buraya yüklemek yerine, `::` gösterimini kullanarak işlevlerini açıkça gösterereceğiz. Bu hangi fonksiyonların ggplot2 içinde yüklü olduğunu ve hangilerinin diğer paketlerden geldiğini görmemize yardımcı olacaktır. Eğer bu paketleri henüz yüklemediyseniz `install.packages()` komutuyla yüklemeniz gerektiğini unutmayınız. 
 
 ```{r, message = FALSE}
 library(tidyverse)
@@ -36,10 +36,10 @@ ggplot(mpg, aes(displ, hwy)) +
   labs(title = "Yakıt verimi genellikle motor büyüklüğüyle azalır")
 ```
 
-Plot başlığının amacı ana bulguyu özetlemektir. Plotu tanımlayan başlıklardan kaçının ör.
-Motor parça değişimi ile yakıt ekonomisini karşılaştıran bir dağılım grafiği. 
+Grafik başlığının amacı ana bulguyu özetlemektir. Grafiği tanımlayan başlıklardan kaçının: örneğin;
+"Motor parça değişimi ile yakıt ekonomisini karşılaştıran bir dağılım grafiği". 
 
-Daha fazla metin eklemek isterseniz ggplot2 2.2.0 ve üst sürümlerinde (bu kitabı okuduğunuzda kullanılabilir durumda olacaktır)  içerisinde ekleyebileceğiniz 2 ayrı kullanışlı etiket var :
+Daha fazla metin eklemek isterseniz ggplot2 2.2.0 ve üst sürümlerinin (bu kitabı okuduğunuzda kullanılabilir durumda olacaktır)  içerisinde ekleyebileceğiniz 2 ayrı kullanışlı etiket var :
 
 *   `subtitle` başlığın altına daha küçük bir fontla açıklayıcı notlar ekler.
 
@@ -51,12 +51,12 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_smooth(se = FALSE) +
   labs(
     title = "Yakıt verimi genellikle motor büyüklüğüyle azalır",
-    subtitle = "İki koltuklu spor araçlar hafif olmasıyla bir istisnadır",
+    subtitle = "İki koltuklu spor araçlar hafif olmaları nedeniyle istisnadır",
     caption = "Veri fueleconomy.gov adresinden alınmıştır"
   )
 ```
 
-Ayrıca `labs()` fonksiyonunu eksen ve gösterge başlıklarını değiştirmek için kullanabilrisiniz. Genellikle kısa değişken isimlerini daha detaylı açıklamalarla değiştirmek ve birimleri dahil etmek iyi bir fikirdir. 
+Ayrıca `labs()` fonksiyonunu eksen ve gösterge (lejant) başlıklarını değiştirmek için kullanabilrisiniz. Genellikle kısa değişken isimlerini daha detaylı açıklamalarla değiştirmek ve birimleri dahil etmek iyi bir fikirdir. 
 
 ```{r, message = FALSE}
 ggplot(mpg, aes(displ, hwy)) +
@@ -69,7 +69,7 @@ ggplot(mpg, aes(displ, hwy)) +
   )
 ```
 
-Matematiksel denklemleri metin dizileri kullanmak mümkündür.  Sadece `""` yerine `quote()` kullanın ve `?plotmath` içerisindeki seçenekleri okuyun:
+Metin dizileri yerine matematiksel denklemleri kullanmak mümkündür.  Sadece `""` yerine `quote()` kullanın ve `?plotmath` içerisindeki seçenekleri okuyun:
 
 ```{r, fig.asp = 1, out.width = "50%", fig.width = 3}
 df <- tibble(
@@ -84,20 +84,19 @@ ggplot(df, aes(x, y)) +
   )
 ```
 
-### Egzersizler
+### Alıştırmalar
 
-1.  Yakıt ekonomisi üzerine özelleştirilmiş `title`, `subtitle`, `caption`, `x`, `y`, and `colour` etiketleriyle bir plot yaratın.
+1.  Yakıt ekonomisi üzerine özelleştirilmiş `title`, `subtitle`, `caption`, `x`, `y`, and `colour` etiketleriyle bir grafik oluşturun.
 
-1.   `geom_smooth()` fonksiyonu bir bakıma biraz yanıltıcı olabiliyor çünkü `hwy` geniş motorlar için hafif spor arabalarının
-eklenmesiyle yukarı eğrilmiş. Modelleme araçlarınızı, modelinizi uydurmak ve daha iyi bir model oluşturmak için kullanın.
+1.   `geom_smooth()` fonksiyonu bir bakıma biraz yanıltıcı olabiliyor çünkü `hwy` geniş motorlar için hafif spor arabalarının eklenmesiyle yukarı eğrilmiş (skewed upwards). Modelleme araçlarınızı, modelinizi uydurmak (fitfing) ve daha iyi bir model oluşturmak için kullanın.
 
-1.  Bir ay önce yarattığınız açıklayıcı grafiği ele alın ve bilgilendirici başlıklar ekleyerek diğerleri için daha anlaşılır yapın.
+1.  Geçen ay oluşturduğunuz bir açıklayıcı grafiği ele alın ve bilgilendirici başlıklar ekleyerek başkaları için daha anlaşılır yapın.
 
 ## Ek açıklamalar
 
-Plotunuzun ana bileşenlerini etiketlemenin yanı sıra, genellikle bireysel gözlemleri ya da gözlem gruplarını etiketlemek de kullanışlıdır. Elinizin altındaki ilk araç `geom_text()` olacaktır.`geom_text()` , `geom_point()` ile benzerlik gösterse de ayrıca aesthetic: `label` (etiketlerine) sahiptir. Bu da metinsel etiketleri plotunuza eklemenize olanak sağlamaktadır.
+Grafiğinizin ana bileşenlerini etiketlemenin yanı sıra, genellikle bireysel gözlemleri ya da gözlem gruplarını etiketlemek de kullanışlıdır. Elinizin altındaki ilk araç `geom_text()` olacaktır.`geom_text()` , `geom_point()` ile benzerlik gösterse de ayrıca aesthetic: `label` (etiketlerine) sahiptir. Bu da metinsel etiketleri grafiğinize eklemenize olanak sağlamaktadır.
 
-Etiketlerin 2 muhtemel kaynağı vardır. Birincisi etiketleri getiren bir tibble’a sahip olmak. Alttaki plot o kadar da kullanışlı değil, ama kullanışlı bir yaklaşımı görselleştirip: her sınıfın en verimli arabalarını dplyr ile getirip, plot üzerinde etiketliyor:
+Etiketlerin 2 muhtemel kaynağı vardır. Birincisi etiketleri getiren bir tibble’a sahip olmak. Alttaki grafik o kadar da kullanışlı değil, ama kullanışlı bir yaklaşımı görselleştirip, her sınıfın en verimli arabalarını dplyr ile getirip, grafik üzerinde etiketliyor:
 
 ```{r}
 best_in_class <- mpg %>%
@@ -109,7 +108,7 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_text(aes(label = model), data = best_in_class)
 ```
 
-Bunu okumak etiketler birbirinin üzerine bindiği için biraz zorlaşıyor. `geom_label()` ile metin arkasına dikdörtgen çizerek biraz iyileştirme yapabiliriz. Ayrıca biz `nudge_y` parametresi kullanarak etiketleri biraz yukarı alarak ilgili noktara taşıyoruz.
+Bunu okumak, etiketler birbirinin üzerine bindiği için biraz zorlaşıyor. `geom_label()` ile metin arkasına dikdörtgen çizerek biraz iyileştirme yapabiliriz. Aynı zamanda `nudge_y` parametresi kullanarak etiketleri biraz yukarı alarak ilgili noktara taşıyoruz.
 
 ```{r}
 ggplot(mpg, aes(displ, hwy)) +
@@ -117,7 +116,7 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_label(aes(label = model), data = best_in_class, nudge_y = 2, alpha = 0.5)
 ```
 
-Bu biraz yardımcı olsa da sol üst köşeye yakından bakarsanız iki etiketin üst üste bindiğini göreceksiniz. Bu genellikle en iyi arabalar için anayolda kat edilen mesafe ve yerine geçme compact ve subcompact kategorilerin aslında aynı olmamasından kaynaklanmaktadır. Her etikete aynı dönüştürmeyi uygulayarak bunları düzeltmeniz mümkün değildir. Bunun yerine Kamil Slowikowski tarafından yazılmış __ggrepel__ paketini kullanabiliriz. Bu kullanışlı paket, otomatik olarak etiketleri düzenleyerek üst üste binmelerini engeller:
+Bu biraz yardımcı olsa da sol üst köşeye yakından bakarsanız iki etiketin üst üste bindiğini göreceksiniz. Bu genellikle en iyi arabalar için anayolda kat edilen mesafe ve yerine geçme, compact ve subcompact kategorilerin aslında aynı olmamasından kaynaklanmaktadır. Her etikete aynı dönüştürmeyi uygulayarak bunları düzeltmeniz mümkün değildir. Bunun yerine Kamil Slowikowski tarafından yazılmış __ggrepel__ paketini kullanabiliriz. Bu kullanışlı paket, otomatik olarak etiketleri düzenleyerek üst üste binmelerini engeller:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy)) +
@@ -126,9 +125,9 @@ ggplot(mpg, aes(displ, hwy)) +
   ggrepel::geom_label_repel(aes(label = model), data = best_in_class)
 ```
 
-Burada kullanılan diğer kullanışlı tekniğe dikkat edin: Etiketlediğim noktaları vurgulamak için ikinci bir büyük, içi boş noktalı bir katman ekledim.
+Burada kullanılan diğer kullanışlı tekniğe dikkat edin: Etiketlediğim noktaları vurgulamak için ikinci bir büyük, boş noktalı bir katman ekledim.
 
-Bazen plotta doğrudan yerleştirilmiş göstergedeki etiketleri değiştirmek için aynı şekilde yararlanabilirsiniz. Bu plot için mükemmel olmasa da çok da kötü sayılmaz. (`theme(legend.position = "none"`) göstergeyi kapatır – bunun hakkında daha sonra kısaca konuşacağız.)
+Bazen grafikte doğrudan yerleştirilmiş göstergedeki etiketleri değiştirmek için ay. Bu plot için mükemmel olmasa da çok da kötü sayılmaz. (`theme(legend.position = "none"`) göstergeyi kapatır – bunun hakkında daha sonra kısaca konuşacağız.)
 
 ```{r}
 class_avg <- mpg %>%

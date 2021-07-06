@@ -125,7 +125,7 @@ ggplot(mpg, aes(displ, hwy)) +
   ggrepel::geom_label_repel(aes(label = model), data = best_in_class)
 ```
 
-Burada kullanılan diğer kullanışlı tekniğe dikkat edin: Etiketlediğim noktaları vurgulamak için ikinci bir büyük, boş noktalı bir katman ekledim.
+Burada kullanılan diğer kullanışlı tekniğe dikkat edin: Etiketlediğim noktaları vurgulamak için ikinci bir büyük, boş noktalı bir katman ekledim. 
 
 Bazen grafikte doğrudan yerleştirilmiş göstergedeki etiketleri değiştirmek için ay. Bu plot için mükemmel olmasa da çok da kötü sayılmaz. (`theme(legend.position = "none"`) göstergeyi kapatır – bunun hakkında daha sonra kısaca konuşacağız.)
 

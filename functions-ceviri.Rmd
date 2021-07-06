@@ -222,7 +222,7 @@ text_input()
 ```
 
 Bu tasarıma iyi bir örnek olarak stringr paketi verilebilir: Hangi fonksiyona ihtiyacınız olduğunu tam olarak hatırlamıyorsanız str_ yazarak hafızanızı tazeleyebilirsiniz.
-Mümkünse mevcut fonksiyon ve değişkenlerin üzerine kaydetmekten kaçının. Bunu genele olarak yapmak mümkün değildir çünkü birçok iyi isim diğer paketler tarafından alınmıştır ama temel R’daki en yaygın isimlerden kaçınmak akıl karışıklığının önüne geçecektir. 
+Mümkünse mevcut fonksiyon ve değişkenlerin üzerine kaydetmekten kaçının. Bunu genele olarak yapmak mümkün değildir çünkü birçok iyi isim diğer paketler tarafından alınmıştır ama temel R’daki en yaygın isimlerden kaçınmak akıl karışıklığının önüne geçecektir.
 
 
 ```{r, eval = FALSE}
@@ -232,26 +232,27 @@ c <- 10
 mean <- function(x) sum(x)
 ```
 
-Use comments, lines starting with `#`, to explain the "why" of your code. You generally should avoid comments that explain the "what" or the "how". If you can't understand what the code does from reading it, you should think about how to rewrite it to be more clear. Do you need to add some intermediate variables with useful names? Do you need to break out a subcomponent of a large function so you can name it? However, your code can never capture the reasoning behind your decisions: why did you choose this approach instead of an alternative? What else did you try that didn't work? It's a great idea to capture that sort of thinking in a comment.
+Kodunuzun ne işe yaradığını açıklamak için # ile başlayan satırlar açarak yorumlar yazın. “ne” ve “nasıl”dan ziyade “niçin”i açıklamalısınız. Okuduğunuzda kodun ne yaptığını anlamıyorsanız daha açık yazın. Belki kullanışlı isimleri olan bazı ara değişkenler eklemelisiniz. Acaba büyük fonksiyonu alt bileşenlerine ayırıp, bunlara isim vererek işleri biraz daha kolaylaştırabilir misiniz? Ancak, kodunuz kararlarınızın arkasındaki gerekçeyi asla yakalayamaz: Neden başka bir alternatifi değil de bu yaklaşımı seçtiniz? Başka neyi denediniz de çalışmadı? Bir yorumda düşüncenin akışını bu şekilde yansıtmak gerçekten de iyi bir fikirdir.
+Yorumların diğer bir faydası dosyanızı okunabilir parçalara kolaylıkla bölebilmenizdir. – ve = kullanarak uzun çizgiler yapın ve böylece ayırmak istediğiniz yerleri belirtin.
 
-Another important use of comments is to break up your file into easily readable chunks. Use long lines of `-` and `=` to make it easy to spot the breaks.
 
 ```{r, eval = FALSE}
-# Load data --------------------------------------
+# Veriyi yükle --------------------------------------
 
-# Plot data --------------------------------------
+# Veriyi grafiğe dök --------------------------------------
 ```
 
-RStudio provides a keyboard shortcut to create these headers (Cmd/Ctrl + Shift + R), and will display them in the code navigation drop-down at the bottom-left of the editor:
+Rstudio’da bulunan bir klavye kısa yolu ile bu başlıkları oluşturmak (Cmd/Ctrl + Shift + R) ve bunları editörün alt solunda bulunan kod navigasyon menüsünde görüntülemek mümkündür.
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("screenshots/rstudio-nav.png")
 ```
 
-### Exercises
+### Alıştırmalar
 
-1.  Read the source code for each of the following three functions, puzzle out
-    what they do, and then brainstorm better names.
+1.  Aşağıdaki üç fonksiyonun her birinin kaynak kodunu okuyun, 
+    bunların ne yaptıklarını çözün ve daha sonlara bunlara 
+    daha iyi isimler bulmak için beyin fırtınası yapın.
     
     ```{r}
     f1 <- function(string, prefix) {
@@ -266,30 +267,30 @@ knitr::include_graphics("screenshots/rstudio-nav.png")
     }
     ```
     
-1.  Take a function that you've written recently and spend 5 minutes 
-    brainstorming a better name for it and its arguments.
+2.  Yakınlarda yazmış olduğunuz bir fonksiyonu alın ve 5 dakika beyin fırtınası 
+    yaparak bu fonksiyona ve argümanlarına daha iyi bir isim düşünün.
 
-1.  Compare and contrast `rnorm()` and `MASS::mvrnorm()`. How could you make
-    them more consistent? 
+3.  `rnorm()` ve `MASS::mvrnorm()` isimlerini karşılaştırın. 
+    Bunları nasıl daha tutarlı hale getirirsiniz?
     
-1.  Make a case for why `norm_r()`, `norm_d()` etc would be better than
-    `rnorm()`, `dnorm()`. Make a case for the opposite.
+4.  `norm_r()`, `norm_d()` vb.'nin `rnorm()`, `dnorm()`'dan daha iyi olduğı bir
+    örnek verin. Bunun tersi için bir örnek verin.
 
-## Conditional execution
+## Koşullu yürütme
 
-An `if` statement allows you to conditionally execute code. It looks like this:
+`if` ifadesi bir kodu koşullu olarak yürütmenizi sağlar. Bu şöyle görünür:
 
 ```{r, eval = FALSE}
-if (condition) {
-  # code executed when condition is TRUE
+if (kosul) {
+  # kosul TRUE olduğunda kod yurutulur
 } else {
-  # code executed when condition is FALSE
+  # kosul FALSE olduğunda kod yurutulur
 }
 ```
 
-To get help on `if` you need to surround it in backticks: `` ?`if` ``. The help isn't particularly helpful if you're not already an experienced programmer, but at least you know how to get to it!
+`if` konusunda yardım almak için şöyle yazıyoruz: ? `` ?`if` `` Eğer deneyimli bir programlamacı değilseniz bu yardım pek de yardımcı olmayacak ama en azından temel düzeyde bilgi sahibi olabileceksiniz.
 
-Here's a simple function that uses an `if` statement. The goal of this function is to return a logical vector describing whether or not each element of a vector is named.
+Şimdi `if` ifadesi kullanan basit bir fonksiyon yazalım. Bu fonksiyonun hedefi bir vektörün her bir elemanının isimlendirilip isimlendirilmediğini tanımlayan mantıksal bir vektör getirmektir.
 
 ```{r}
 has_name <- function(x) {
